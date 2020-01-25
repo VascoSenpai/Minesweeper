@@ -36,7 +36,7 @@ class Square:
         else:
             self.isShown = True
             self.board.shown += 1
-            #print(self.board.shown)
+            
         
 
     def flag(self):
@@ -55,8 +55,6 @@ class Square:
         text = str(self.board.board[self.x][self.y])
         if self.mouseOn():
             pass
-            # pygame.draw.rect(self.surface, BLACKGRAY, (self.coordinates[0] +1 , self.coordinates[1] +1, self.sizeOfSquare -1, self.sizeOfSquare -1))
-            # pygame.display.update()
         if self.isShown:
             if text == '1':
                 textsurface = font.render(str(self.board.board[self.x][self.y]), False, BLUE)
@@ -83,9 +81,9 @@ class Square:
                 lost =  True
             elif text == '0':
                 self.board.blankClick = True
-                # pygame.draw.rect(self.surface, WHITEGRAY, (self.coordinates[0] +1 , self.coordinates[1] +1, self.sizeOfSquare -1, self.sizeOfSquare -1))
+                
                 self.clickingOnBlank()
-                # self.draw()
+                
                 
             else:
                 textsurface = font.render(str(self.board.board[self.x][self.y]), False, WHITE)
@@ -100,10 +98,9 @@ class Square:
             pass
         
         if self.isFlagged:
-            #textsurface = font.render('#', False, (WHITE))
-            #self.surface.blit(textsurface, (self.coordinates[0] + 15, self.coordinates[1] + 5))
+            
             drawFlag(self.surface, self.coordinates[0], self.coordinates[1])
-            # print(self.board.showing)
+            
             self.board.blankClick = False
 
             
@@ -142,61 +139,53 @@ class Square:
         try:
             if x != 0 and y != 0: 
                 self.board.squares[x - 1][y - 1].show()  
-                # self.repeat()        
+                        
         except:
             pass
         try:
             if y != 0:
                 self.board.squares[x][y - 1].show()
-                # self.repeat() 
+                 
         except:
             pass
         try:
             if y != 0:
                 self.board.squares[x + 1][y - 1].show()
-                # self.repeat() 
+                
         except:
             pass
     
         try:
             if x != 0:
                 self.board.squares[x - 1][y].show()
-                # self.repeat()
+                
             
         except:
             pass
         try:
             self.board.squares[x + 1][y].show()
-            # self.repeat() 
+             
         except:
             pass
 
         try:
             if x != 0:
                 self.board.squares[x - 1][y + 1].show()
-                # self.repeat() 
+                
         except:
             pass
         try:
             self.board.squares[x][y + 1].show()
-            # self.repeat()
+            
             
         except:
             pass
         try:
             self.board.squares[x + 1][y + 1].show()
-            # self.repeat() 
+            
         except:
             pass
-
-        '''
-        for i in range(0, len(self.board.showing)):
-            u = self.board.squares[self.board.showing[i][0]][self.board.showing[i][1]]
-            #if u.isShown:
-            u.draw()
-        '''
         
-
 
 class Board:
     def __init__(self, surface, rows, columns, sizeOfSquare):
@@ -295,9 +284,7 @@ class Board:
                         counter += 1
                         self.board[bombx][bomby] = 'X'
                     
-                    
-            #print(firstX)
-            #print(firstY)
+
         randomBombs()
         defineNum()
 
@@ -413,8 +400,7 @@ class Button:
             pygame.draw.rect(self.surface, self.insideColorOut, (self.position[0] + 5, self.position[1] + 5, self.width - 10, self.height - 10))
 
         #Text
-        # pygame.font.init()
-        #font = pygame.font.Font('FFFFORWA.TTF', 32)
+        
         textsurface = self.font.render(self.text, False, self.outsideColor)
         self.surface.blit(textsurface, (self.position[0] + 17, self.position[1] + 4))
         pygame.display.update()
@@ -434,7 +420,6 @@ def squareBackground(surface, text, coordinates, sizeOfSquare, flagged):
 def drawFlag(surface, x, y):
     pygame.draw.rect(surface, WHITE, (x + 36, y+ 25, 4, 15))
     pygame.draw.polygon(surface, RED, ((x+10, y+20), (x+40, y+10), (x+40, y+30)))
-    # pygame.draw.rect(surface, WHITE, (x + 45, y+ 25, 2, 15))
 
 
 
@@ -445,7 +430,6 @@ def drawGrid(surface, rows, columns, sizeOfSquare):
             pygame.draw.line(surface, WHITE, (x * sizeOfSquare, TOPY), (x * sizeOfSquare, y * sizeOfSquare + TOPY))
             pygame.draw.line(surface, WHITE, (0, y* sizeOfSquare + TOPY), (x * sizeOfSquare, y * sizeOfSquare + TOPY))
     
-    # pygame.display.update()
 
 def checkMouse(board, sizeOfSquare):
     global mouseClick
@@ -483,7 +467,6 @@ def printFlagsLeft(surface, board, width, height):
         textsurface = font.render(' ' + str(board.flagsLeft), False, WHITE)
     pygame.draw.rect(surface, BLACK, (0, 0, width, TOPY))
     surface.blit(textsurface, (width-100, TOPY-70))
-    # pygame.display.update()
 
 
 def printTime(surface, clock):
@@ -560,11 +543,10 @@ def main():
 
 
     board = Board(surface, rows, columns, sizeOfSquare)
-    # board.create()
+    
     while running:
         checkMouse(board, sizeOfSquare)
-        #surface.fill(BLACK)
-        #board.drawShown()
+
         drawGrid(surface, rows, columns, sizeOfSquare) 
         board.draw()
         topBar(surface, clock, board, width, height, rows, columns, sizeOfSquare)
@@ -578,7 +560,7 @@ def main():
                 clickCounter = 0
                 surface.fill(BLACK)
                 drawGrid(surface, rows, columns, sizeOfSquare)
-                # print('ai')
+                
                 board = Board(surface, rows, columns, sizeOfSquare)
                 topBar(surface, clock, board, width, height, rows, columns, sizeOfSquare)
                 checkMouse(board, sizeOfSquare)
@@ -590,13 +572,12 @@ def main():
             clickCounter = 0
             surface.fill(BLACK)
             drawGrid(surface, rows, columns, sizeOfSquare)
-            # print('ai')
+            
             board = Board(surface, rows, columns, sizeOfSquare)
             checkMouse(board, sizeOfSquare)
 
         pygame.time.delay(1)
         mouseClick = (0,0,0)
-        # blankClick = False
         
 
 
